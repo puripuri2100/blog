@@ -1,0 +1,327 @@
+@require: make-html/stdjahtml
+@require: make-html/itemize
+@require: make-html/url
+@require: make-html/code
+@import: ../local
+
+document (|
+  title = {\SATySFi;に関すること};
+  author = {\@puripuri2100};
+  style-sheet=`main.css`;
+|) '<
+  +section{はじめに} <
+    +subsection{\SATySFi;とは} <
+      +p{
+        \href(`https://github.com/gfngfn/SATySFi`){\SATySFi;}とは、型による静的検証能力の高い組版システムです。
+      }
+      +p{従来の組版システムであるLaTeXにはない特徴である可読性の高さと詳細なエラー報告機能を持つことを目指して作られています。}
+      +p{The SATySFibook（SATySFiのマニュアル）が無料で見ることができるようになりました。\href(`https://gfngfn.booth.pm/items/1127224`){URL}はここです。わからないところがあったらその箇所を読みましょう。
+      投げ銭もできます。紙とインクでできた方も欲しい方は\href(`https://gfngfn.booth.pm/items/1046747`){ここ}から買いましょう！}
+    >
+    +subsection{\SATySFi;の特徴} <
+      +listing{
+        * マークアップ言語
+        * 裏でTeXを使っていたりせずに自前でPDFファイルを出力してくれる
+        * PDFファイルだけではなく、HTMLファイルやTeXファイルを出力する機能もある。このブログもこの機能を使って自動生成している。（\href(`https://twitter.com/bd_gfngfn/status/1030292788007428096`){参照ツイート}）
+        * 数式を表現することが非常に得意
+        * エラーが表示されるタイミングが早く、わかりやすい
+        * 機能の拡張が便利
+        * 非常に若いソフトであり、オワコン化が囁かれているLaTeXに代わりになることが可能かもしれない
+        * LGPLv3の元GitHubで公開されているOSSである（つまり、タダで使用できる）
+      }
+    >
+
+    +subsection{（今更だけど）この記事の目的} <
+      +p{\SATySFi;を始めようと思った人のため、そして自分のために\SATySFi;関係の情報を集めておくことが目的です。}
+      +p{「\SATySFi;完全に理解した」という人のためではないのでご了承くださいませ。}
+      +p{間違っていることが書いてありましたら教えてください。直していきたいと思います。}
+    >
+
+    +subsection{注意事項} <
+      +p{書く内容に関しては正確なものになるように気をつけていますが、間違っていることを書いているかもしれません。この記事に頼り切らず、他の情報と合わせて使用してください。}
+      +p{この記事を使用したことで受けた被害等の責任は取りかねます。}
+      +p{\SATySFi;はまだバージョンが0.0.nと、安定版とは程遠いのが現状です（逆に言えば更に発展していく余地があるということですが）。どんどん機能が追加されていったり、今まであった機能が廃止されたりと言った変化が起きることは充分ありえます（v1.0.0までに互換性のない変更があることは十分にありえるので、パッケージ作成者は情報を追うべきです）。}
+      +p{情報収集をある程度しておくことが大切です。}
+
+      +p{この記事に情報はなるべく最新版の\SATySFi;について述べていく予定です（大きな変更が\SATySFi;に加わったらなるべく対応していくつもりです）。
+      ですので古いSATySFiにはない機能について述べたりしていきますが、ご了承ください（特にSATySFi for Windowsを使っている人）。}
+    >
+  >
+
+  +section{\SATySFi;を使えるようにする}<
+
+    +subsection{\href(`https://github.com/na4zagin3/satyrographos`){Satyrographos}を使う}<
+      +p{\SATySFi;を使って文書を作りたい人やパッケージを作りたい人は、
+      \SATySFi;のパッケージマネージャである\href(`https://github.com/na4zagin3/satyrographos`){Satyrographos}を使うべきです。}
+      +p{\*nix系でしか使えませんが、Windows10の人であればWindows Subsystem for Linux(WSL)を使うことでインストールすることができるようになります。ぜひ使いましょう。}
+      +p{インストールの方法は「\href(`https://qiita.com/na4zagin3/items/a6e025c17ef991a4c923`){\*nix 向け SATySFi インストールバトル手引き 2019年1・2月版}」という記事を読んでください。}
+    >
+
+    +subsection{Homebrewを使う} <
+      +p{MacではHomebrewを使う方法があります。Homebrewをインストールした状態で}
+      +code(`
+$ brew install --HEAD nyuichi/satysfi/satysfi
+      `);
+      +p{と打つとインストールできるそうです。}
+    >
+
+    +subsection{satysfi-unofficialを使う} <
+      +p{matsud224氏が「SATySFiをちょっと試してみたい人がOCamlのビルドからやらないといけないのはハードルが高い」と思ったらしく、少し簡単にSATySFiを入れられるようなものを整えてくださいました。}
+      +p{\href(`https://packagecloud.io/matsud224/satysfi-unofficial`){satysfi-unofficial}のREADMEを読んでそれに従えばインストールできます。}
+    >
+
+    +subsection{SATySFi for Windowsをインストールする} <
+      +p{v0.0.1の\SATySFi;をWindowsで使うことができます。}
+      +p{Windows 8しかないなど、どうしてもWSLで入れられない人のみ使いましょう。}
+      +p{「\href(`https://qnighy.hatenablog.com/entry/2018/03/18/220000`){SATySFi for Windows を作った}」で概要を知ることができます。}
+    >
+
+    +subsection{自分でコンパイルする} <
+      +p{\SATySFi;に更新が有った時に人柱になる予定の人などは\SATySFi;のソースからコンパイルして使うのが良いでしょう。}
+      +p{詳しい入れ方は\href(`https://github.com/gfngfn/SATySFi/blob/master/README-ja.md#opam-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95`){公式README}を読みましょう。}
+    >
+
+    +subsection{Web上で\SATySFi;を使う} <
+      +p{実機にインストールせずにWeb上だけで使えるサービスがあります。}
+      +listing{
+        * \href(`http://satysfi-playground.tech/`){SATySFi Playground}
+        * \href(`https://satysfi.ml/`){SATySFi-Online}
+      }
+    >
+
+    +subsection{Dockerを使う} <
+      +p{Dockerよくわからないので挙げておきます。}
+      +listing{
+        * \href(`https://hub.docker.com/r/amutake/satysfi/`){amutake/satysfi}\line-break;
+          たぶんこれが一番です。\href(`http://amutake.hatenablog.com/entry/2019/12/03/082528`){紹介記事}や\href(`http://amutake.hatenablog.com/entry/2019/12/06/103839`){GitHub Actionsで使う記事}などがあります。
+        * \href(`https://hub.docker.com/r/pandaman64/satysfi/`){pandaman64/satysfi}
+        * \href(`https://gist.github.com/zr-tex8r/bf38067a0d302eba5ab52acb8c0f9f30`){Docker container that can do SATySFi}
+      }
+    >
+  >
+
+  +section{demoファイルのコンパイル}<
+    +p{とりあえずdemoファイルをコンパイルしてみましょう。}
+    +p{\href(`https://github.com/gfngfn/SATySFi`){SATySFiのリポジトリ}をダウンロードするか、\href(`https://github.com/gfngfn/SATySFi/releases`){SATySFiのリリース}をダウンロードするかしましょう。}
+    +p{準備ができたらターミナルを開きます。ターミナルで、demoフォルダまで移動します。}
+    +p{移動できたら次のように打ち込みます。}
+    +code(`
+$ make
+    `);
+    +p{するとログが出てPDFファイルが出力されると思います。}
+    +p{makeがインストールされていない場合は}
+    +code(`
+$ satysfi demo.saty
+    `);
+    +p{と打ちましょう。}
+    +p{ココらへんはLaTeXのコンパイルと似たようなものでしょう。}
+    +p{コンパイルが終わったら出力されたPDFファイルを見てみましょう。}
+    +p{ヘッダーやフッター、画像の出力、数式の出力等ができていることがわかるでしょう。}
+    +p{これの中身はdemo.satyに書いてあります。見てみると面白いでしょう。}
+  >
+
+  +section{\SATySFi;関係の拡張子} <
+    +p{まずは通常の文を書くのが\code(`.saty`);ファイルです。LaTeXで言うところの\code(`.tex`);ファイルでしょう。}
+    +p{機能を拡張、追加するコマンドを書くのが\code(`.satyh`);ファイルです。LaTeXで言うところの\code(`.sty`);ファイルでしょう。}
+    +p{節タイトルやページ数などが記録されているのが\code(`satysfi-aux`);ファイルです。LaTeXで言うところの\code(`.aux`);ファイルでしょう。これは自動で作成されるので触る必要はありません。}
+    +p{これ以外にもSATySFiによって提供される拡張子はいくつかありますが、表に出てくるのはこれくらいです。}
+  >
+
+  +section{コンパイルオプション}<
+    +code(`
+$ satysfi demo.saty -o output.pdf
+$ satysfi -help
+    `);
+  +p{などのようにしてオプションを付けてコンパイルしたりすることができます。
+    \code(`-help`);で全てのオプションを確認することができます（以下、コピペしておきます）。}
+  +code(`
+  -o  Specify output file
+  --output  Specify output file
+  -v  Prints version
+  --version  Prints version
+  --full-path  Displays paths in full-path style
+  --debug-show-bbox  Outputs bounding boxes for glyphs
+  --debug-show-space  Outputs boxes for spaces
+  --debug-show-block-bbox  Outputs bounding boxes for blocks
+  --debug-show-block-space  Outputs visualized block spaces
+  -t  Stops after type checking
+  --type-check-only  Stops after type checking
+  -b  Use bytecode compiler
+  --bytecomp  Use bytecode compiler
+  --text-mode  Set text mode
+  --markdown  Pass Markdown source as input
+  --show-fonts  Displays all the available fonts
+  -C  Add colon-separated paths to configuration search path
+  --config  Add colon-separated paths to configuration search path
+  -help  Display this list of options
+  --help  Display this list of options 
+  `);
+  >
+
+  +section{パッケージを使う} <
+    +p{\SATySFi;が見つけられる場所に置いてある場合は、文書の冒頭で\code(`@require: stdjabook`);の様に書いて読み込むことができます。
+      後述するようにSatyrographosを使ってパッケージをインストールすると、パッケージのごとにフォルダ内に入れられるので、
+    \code(`@require: base/float`);のように書かなければいけないことがあります。}
+    +p{\code(`.satyh`);ファイルと同じフォルダ内にある\code(`.satyh`);ファイルを読み込むときは\code(`@import: local`);の様に書いて読み込みます。
+    （\href(`https://twitter.com/bd_gfngfn/status/961476981442277376`){参考ツイート1},
+      \href(`https://twitter.com/bd_gfngfn/status/961477626538770433`){参考ツイート2},
+      \href(`https://twitter.com/bd_gfngfn/status/993502360189132800`){参考ツイート3}）
+    }
+  >
+
+  +section{外部パッケージをインストールするする}<
+    +p{\SATySFi;のパッケージはデフォルトで多数用意されていますが、さらに様々な人によって様々なパッケージ（クラスファイルを含む）が作成されて公開されています。}
+    +p{現状公開されているパッケージの一覧は
+      \listing{
+        * \href(`https://github.com/gfngfn/SATySFi/wiki/%E7%9B%AE%E7%9A%84%E5%88%A5%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E4%B8%80%E8%A6%A7`){SATySFi Wiki（目的別パッケージ一覧）}
+        * \href(`https://puripuri2100.github.io/SATySFi-package-list/`){SATySFi package list}
+      }
+      で見ることができます。
+    }
+    +p{これらで紹介されているリポジトリなどからファイルをダウンロードして、\SATySFi;が見つけられるところに置くだけで使えるようになります。}
+    +p{しかし、この作業が結構面倒なので、\SATySFi;のパッケージマネージャであるSatyrographosを使うことがオススメされます。
+    使い方は\href(`https://qiita.com/na4zagin3/items/14fe2647b663eeac6ac2`){Satyrographos でパッケージの簡単インストール}を参考にしてください。}
+  >
+
+  +section{エディタ拡張}<
+    +p{ファイルを編集する際、なにも補助がないとなかなか厳しいです。そこでSATySFiを書く時に補助してくれる拡張機能を紹介します。}
+    +listing{
+      * \href(`https://github.com/qnighy/satysfi.vim`){satysfi.vim}\line-break;
+        VimでSATySFiを使う時に補助してくれる拡張機能です。
+      * \href(`https://github.com/gfngfn/satysfi.el`){satysfi.el}\line-break;
+        EmacsでSATySFiを使う時に補助してくれる拡張機能だと思います。
+      * \href(`https://github.com/wraikny/vscode-satysfi`){vscode-satysfi}\line-break;
+        VSCodeでSATySFiを使う時に補助してくれる拡張機能です。
+      * \href(`https://github.com/yudai-nkt/language-satysfi`){language-satysfi}\line-break;
+        AtomでSATySFiを使う時に補助してくれる拡張機能です。
+    }
+  >
+
+  +section {書き方} <
+    +p {
+      ※SATySFiに標準で含まれているパッケージであるstdjabookを使用する想定で書きます。
+    }
+    +p {
+      まずは簡単なドキュメントです。
+    }
+    +code(`
+    @require: stdjabook
+    StdJaBook.document(|
+        title = {Hello \SATySFi;};
+        author = {私};
+        show-title = true;
+        show-toc = true;
+    |)'<
+        +p{
+            はじめてのサティスファイ！
+        }
+    >`);
+    +p {
+      これをHello.satyとして保存し、
+    }
+    +code(`
+    $ satysfi Hello.saty`);
+    +p {
+      とするとHello.pdfという名前のPDFファイルが出てきます。
+    }
+    +p {
+      次に中身を見ていきましょう。
+    }
+    +p {
+      一番最初の\code(`@require: stdjabook`);ですが、これは既に説明したように、パッケージを読み込むためのコマンドです（stdjabookはLaTeXでいうところのクラスファイルに相当するもの）。
+    }
+    +p {
+      二番目の\code(`StdJaBook.document(||)'<>`);ですが、この文書全体に関する指定です。\code(`document(||)'<>`);でも良いのですが、「stdjabookによって提供されたものを使うことを明らかにするために\code(`StdJaBook.`);を付けるべき」という考えのもとStdJaBookをつけています。これはどちらでも良いです（\href(`https://twitter.com/bd_gfngfn/status/1031512917814857733`){参考ツイート}）。\code(`document`);の中身ですが、こうなる理由はstdjabook側で\code(`document`);が以下のように定義されているからです。
+    }
+    +code(`
+      val document : 'a -> block-text -> document
+        constraint 'a :: (|
+          title : inline-text;
+          author : inline-text;
+          show-toc : bool;
+          show-title : bool;
+        |)`);
+    +p {
+      なので、\code(`title`);と\code(`author`);にはインラインテキスト（普通の文章）を、\code(`show-toc`);と\code(`show-title`);には\code(`ture`);か\code(`false`);のどちらかを入れましょう。
+    これらの役割は名の通りですが、\code(`title`);はこの文書のタイトルを、\code(`author`);は著者名を入れるものです。\code(`show-toc`);は目次を出力するかしないかの選択を、\code(`show-title`);はタイトルを出力するかしないかの選択です。
+    }
+    +p {
+      三番目の\code(`+p`);ですが、これは段落を表すコマンドです。
+    stdjabookでは以下のように定義されています。
+    }
+    +p {
+      この他にも、行頭インデントなしの段落を表す\code(`+pn`);というコマンドもあります。
+    }
+    +p {
+      一応stdjabookが提供するコマンドとその役割を書いておきます。
+    }
+    +listing{
+      *  \code(`title`);（inline-textを入れてください。最初のdocumentの部分で指定します。名前の通り、文書のタイトルを書きます。）
+      *  \code(`author`);（inline-textを入れてください。最初のdocumentの部分で指定します。名前の通り、文書の作者の名前を書きます。）
+      *  \code(`show-title`);（trueかfalseを指定します。最初のdocumentの部分で指定します。タイトルを表示するか否かを選択します。）
+      *  \code(`show-toc`);（trueかfalseを指定します。最初のdocumentの部分で指定します。目次を表示するか否かを選択します。）
+      *  \code(`\ref`);（相互参照です。本文中で使用します。）
+      *  \code(`\ref-page`);（ページの相互参照です。本文中で使用します。）
+      *  \code(`\figure`);（画像の配置です。）
+      *  \code(`+p`);（行頭インデントのある段落を書くのに使用します。）
+      *  \code(`+pn`);（行頭インデントのない段落を書くのにしようします。）
+      *  \code(`+section`);（節です。）
+      *  \code(`+subsectioon`);（小節です。）
+      *  \code(`\emaph`);（強調です。）
+      *  \code(`\footnote`);（フットノートです。）
+    }
+    +p {
+      この時、\code(`+section`);や\code(`+subsection`);は、
+    }
+    +code(`
+    +section{節タイトル}<
+        +p{文章}
+    >`);
+    +p {
+      のように\code(`<>`);を後ろにつけます。これは
+    }
+    +p {
+      「水平方向（文字が行をなす向き）の入力を\code(`{ 〜 }`); で，垂直方向（行が段落をなす向き）の入力を \code(`< 〜 >`); で括って両者を区別する」
+      ということらしいです（\href(`https://twitter.com/bd_gfngfn/status/909753869084762112`){参照ツイート}）。
+    }
+    +p {
+      数式の書き方についてですが、基本的に\code(`${}`);の中に書けば良いらしいです（あまり数式を書かないのでよくわからない）。
+    }
+    +code(`
+${a^5 \times a^7 \times a^3 = a^{15}}
+    `);
+    +p {みたいな感じです。括弧は\code(`\paren`);を使ったりするなど、少しLaTeXと違うところがあります。}
+  >
+
+  +section {資料} <
+    +p {
+      The SATySFibookが\href(`https://gfngfn.booth.pm/items/1127224`){booth}で公開されています。
+    }
+    +p {
+      \href(`https://github.com/gfngfn/SATySFi/blob/66fdd27e2ba65e4b4c4c0612834e6c547905ab11/memo-ja-how-to-use.md`){日本語で書かれたメモ}があります。
+      他に、qnighy氏がまとめてくださった「\href(`https://gist.github.com/qnighy/951d1ee5a7ee7c8f95bb323e881eaf8a`){SATySFi構文メモ}」があります。
+    }
+    +p {
+      また、設計思想等を知ることが出来るものとして、「\href(`https://www.youtube.com/watch?time_continue=1&v=VPJCneHFyNM`){【2017年度未踏／No.2】型による静的検証能力の高い組版システムの開発} 」という動画と、「\href(`https://drive.google.com/file/d/1BB7ZAiwPO3hVtq7PGImPtMs1-kOd7SzW/view`){スライド}」があります。
+    }
+  >
+
+  +section {情報共有場所} <
+    +p {
+      残念ながらSATySFiに関する情報の共有場所はかなり少ないです。残念ながら。
+    }
+    +p {
+      \href(`https://github.com/gfngfn/SATySFi/wiki/SATySFi-Wiki`){SATySFi Wiki}があり、情報共有が可能です。これはGitHubアカウントを持っていれば編集することができます。みなさんもぜひ情報を追加していきましょう！
+    }
+    +p {
+      Twitterで情報を収集することもできます。
+    }
+    +p {
+      他にもSATySFi Advent Calendarがあります。
+    }
+    +listing{
+      * \href(`https://adventar.org/calendars/3418`){SATySFi Advent Calendar 2018}
+      * \href(`https://adventar.org/calendars/3929`){SATySFi Advent Calendar 2019}
+    }
+  >
+>

@@ -1,0 +1,16 @@
+@require: make-html/stdjahtml
+@require: make-html/itemize
+@require: make-html/url
+@import: ../local
+
+document (|
+  title = {puripuri2100/blog};
+  author = {\@puripuri2100};
+  style-sheet = `main.css`
+|) '<
+  +p{\@puripuri2100が投稿するブログです。}
+  +listing{
+    * \href(`what-is-satysfi.html`){SATySFiに関すること}\line-break;
+      SATySFiに関することをまとめたQiitaの記事を再編集して載せました。
+  }
+>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>SATySFiに関すること</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <section>
+      <h1>はじめに</h1>
+      <section>
+        <h2>SATySFiとは</h2>
+        <p>
+          <a href="https://github.com/gfngfn/SATySFi">
+            SATySFi
+          </a>とは、型による静的検証能力の高い組版システムです。
+        </p>
+        <p>
+          従来の組版システムであるLaTeXにはない特徴である可読性の高さと詳細なエラー報告機能を持つことを目指して作られています。
+        </p>
+        <p>
+          The SATySFibook（SATySFiのマニュアル）が無料で見ることができるようになりました。<a href="https://gfngfn.booth.pm/items/1127224">
+            URL
+          </a>はここです。わからないところがあったらその箇所を読みましょう。
+          投げ銭もできます。紙とインクでできた方も欲しい方は<a href="https://gfngfn.booth.pm/items/1046747">
+            ここ
+          </a>から買いましょう！
+        </p>
+        
+      </section><section>
+        <h2>SATySFiの特徴</h2>
+        <ul>
+        <li>マークアップ言語</li>
+        <li>裏でTeXを使っていたりせずに自前でPDFファイルを出力してくれる</li>
+        <li>PDFファイルだけではなく、HTMLファイルやTeXファイルを出力する機能もある。このブログもこの機能を使って自動生成している。（<a href="https://twitter.com/bd_gfngfn/status/1030292788007428096">
+          参照ツイート
+        </a>）</li>
+        <li>数式を表現することが非常に得意</li>
+        <li>エラーが表示されるタイミングが早く、わかりやすい</li>
+        <li>機能の拡張が便利</li>
+        <li>非常に若いソフトであり、オワコン化が囁かれているLaTeXに代わりになることが可能かもしれない</li>
+        <li>LGPLv3の元GitHubで公開されているOSSである（つまり、タダで使用できる）</li>
+        </ul>
+        
+      </section><section>
+        <h2>（今更だけど）この記事の目的</h2>
+        <p>
+          SATySFiを始めようと思った人のため、そして自分のためにSATySFi関係の情報を集めておくことが目的です。
+        </p>
+        <p>
+          「SATySFi完全に理解した」という人のためではないのでご了承くださいませ。
+        </p>
+        <p>
+          間違っていることが書いてありましたら教えてください。直していきたいと思います。
+        </p>
+        
+      </section><section>
+        <h2>注意事項</h2>
+        <p>
+          書く内容に関しては正確なものになるように気をつけていますが、間違っていることを書いているかもしれません。この記事に頼り切らず、他の情報と合わせて使用してください。
+        </p>
+        <p>
+          この記事を使用したことで受けた被害等の責任は取りかねます。
+        </p>
+        <p>
+          SATySFiはまだバージョンが0.0.nと、安定版とは程遠いのが現状です（逆に言えば更に発展していく余地があるということですが）。どんどん機能が追加されていったり、今まであった機能が廃止されたりと言った変化が起きることは充分ありえます（v1.0.0までに互換性のない変更があることは十分にありえるので、パッケージ作成者は情報を追うべきです）。
+        </p>
+        <p>
+          情報収集をある程度しておくことが大切です。
+        </p>
+        <p>
+          この記事に情報はなるべく最新版のSATySFiについて述べていく予定です（大きな変更がSATySFiに加わったらなるべく対応していくつもりです）。
+          ですので古いSATySFiにはない機能について述べたりしていきますが、ご了承ください（特にSATySFi for Windowsを使っている人）。
+        </p>
+        
+      </section>
+    </section><section>
+      <h1>SATySFiを使えるようにする</h1>
+      <section>
+        <h2><a href="https://github.com/na4zagin3/satyrographos">
+            Satyrographos
+          </a>を使う</h2>
+        <p>
+          SATySFiを使って文書を作りたい人やパッケージを作りたい人は、
+          SATySFiのパッケージマネージャである<a href="https://github.com/na4zagin3/satyrographos">
+            Satyrographos
+          </a>を使うべきです。
+        </p>
+        <p>
+          *nix系でしか使えませんが、Windows10の人であればWindows Subsystem for Linux(WSL)を使うことでインストールすることができるようになります。ぜひ使いましょう。
+        </p>
+        <p>
+          インストールの方法は「<a href="https://qiita.com/na4zagin3/items/a6e025c17ef991a4c923">
+            *nix 向け SATySFi インストールバトル手引き 2019年1・2月版
+          </a>」という記事を読んでください。
+        </p>
+        
+      </section><section>
+        <h2>Homebrewを使う</h2>
+        <p>
+          MacではHomebrewを使う方法があります。Homebrewをインストールした状態で
+        </p>
+        <div class="code-display"><code>$ brew install --HEAD nyuichi/satysfi/satysfi</code></div><p>
+          と打つとインストールできるそうです。
+        </p>
+        
+      </section><section>
+        <h2>satysfi-unofficialを使う</h2>
+        <p>
+          matsud224氏が「SATySFiをちょっと試してみたい人がOCamlのビルドからやらないといけないのはハードルが高い」と思ったらしく、少し簡単にSATySFiを入れられるようなものを整えてくださいました。
+        </p>
+        <p>
+          <a href="https://packagecloud.io/matsud224/satysfi-unofficial">
+            satysfi-unofficial
+          </a>のREADMEを読んでそれに従えばインストールできます。
+        </p>
+        
+      </section><section>
+        <h2>SATySFi for Windowsをインストールする</h2>
+        <p>
+          v0.0.1のSATySFiをWindowsで使うことができます。
+        </p>
+        <p>
+          Windows 8しかないなど、どうしてもWSLで入れられない人のみ使いましょう。
+        </p>
+        <p>
+          「<a href="https://qnighy.hatenablog.com/entry/2018/03/18/220000">
+            SATySFi for Windows を作った
+          </a>」で概要を知ることができます。
+        </p>
+        
+      </section><section>
+        <h2>自分でコンパイルする</h2>
+        <p>
+          SATySFiに更新が有った時に人柱になる予定の人などはSATySFiのソースからコンパイルして使うのが良いでしょう。
+        </p>
+        <p>
+          詳しい入れ方は<a href="https://github.com/gfngfn/SATySFi/blob/master/README-ja.md#opam-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95">
+            公式README
+          </a>を読みましょう。
+        </p>
+        
+      </section><section>
+        <h2>Web上でSATySFiを使う</h2>
+        <p>
+          実機にインストールせずにWeb上だけで使えるサービスがあります。
+        </p>
+        <ul>
+        <li><a href="http://satysfi-playground.tech/">
+          SATySFi Playground
+        </a></li>
+        <li><a href="https://satysfi.ml/">
+          SATySFi-Online
+        </a></li>
+        </ul>
+        
+      </section><section>
+        <h2>Dockerを使う</h2>
+        <p>
+          Dockerよくわからないので挙げておきます。
+        </p>
+        <ul>
+        <li><a href="https://hub.docker.com/r/amutake/satysfi/">
+          amutake/satysfi
+        </a><br>
+        たぶんこれが一番です。<a href="http://amutake.hatenablog.com/entry/2019/12/03/082528">
+          紹介記事
+        </a>や<a href="http://amutake.hatenablog.com/entry/2019/12/06/103839">
+          GitHub Actionsで使う記事
+        </a>などがあります。</li>
+        <li><a href="https://hub.docker.com/r/pandaman64/satysfi/">
+          pandaman64/satysfi
+        </a></li>
+        <li><a href="https://gist.github.com/zr-tex8r/bf38067a0d302eba5ab52acb8c0f9f30">
+          Docker container that can do SATySFi
+        </a></li>
+        </ul>
+        
+      </section>
+    </section><section>
+      <h1>demoファイルのコンパイル</h1>
+      <p>
+        とりあえずdemoファイルをコンパイルしてみましょう。
+      </p>
+      <p>
+        <a href="https://github.com/gfngfn/SATySFi">
+          SATySFiのリポジトリ
+        </a>をダウンロードするか、<a href="https://github.com/gfngfn/SATySFi/releases">
+          SATySFiのリリース
+        </a>をダウンロードするかしましょう。
+      </p>
+      <p>
+        準備ができたらターミナルを開きます。ターミナルで、demoフォルダまで移動します。
+      </p>
+      <p>
+        移動できたら次のように打ち込みます。
+      </p>
+      <div class="code-display"><code>$ make</code></div><p>
+        するとログが出てPDFファイルが出力されると思います。
+      </p>
+      <p>
+        makeがインストールされていない場合は
+      </p>
+      <div class="code-display"><code>$ satysfi demo.saty</code></div><p>
+        と打ちましょう。
+      </p>
+      <p>
+        ココらへんはLaTeXのコンパイルと似たようなものでしょう。
+      </p>
+      <p>
+        コンパイルが終わったら出力されたPDFファイルを見てみましょう。
+      </p>
+      <p>
+        ヘッダーやフッター、画像の出力、数式の出力等ができていることがわかるでしょう。
+      </p>
+      <p>
+        これの中身はdemo.satyに書いてあります。見てみると面白いでしょう。
+      </p>
+      
+    </section><section>
+      <h1>SATySFi関係の拡張子</h1>
+      <p>
+        まずは通常の文を書くのが<span class="code-inline"><code>.saty</code></span>ファイルです。LaTeXで言うところの<span class="code-inline"><code>.tex</code></span>ファイルでしょう。
+      </p>
+      <p>
+        機能を拡張、追加するコマンドを書くのが<span class="code-inline"><code>.satyh</code></span>ファイルです。LaTeXで言うところの<span class="code-inline"><code>.sty</code></span>ファイルでしょう。
+      </p>
+      <p>
+        節タイトルやページ数などが記録されているのが<span class="code-inline"><code>satysfi-aux</code></span>ファイルです。LaTeXで言うところの<span class="code-inline"><code>.aux</code></span>ファイルでしょう。これは自動で作成されるので触る必要はありません。
+      </p>
+      <p>
+        これ以外にもSATySFiによって提供される拡張子はいくつかありますが、表に出てくるのはこれくらいです。
+      </p>
+      
+    </section><section>
+      <h1>コンパイルオプション</h1>
+      <div class="code-display"><code>$ satysfi demo.saty -o output.pdf<br>
+                    $ satysfi -help</code></div><p>
+        などのようにしてオプションを付けてコンパイルしたりすることができます。
+        <span class="code-inline"><code>-help</code></span>で全てのオプションを確認することができます（以下、コピペしておきます）。
+      </p>
+      <div class="code-display"><code>-o  Specify output file<br>
+                    --output  Specify output file<br>
+                    -v  Prints version<br>
+                    --version  Prints version<br>
+                    --full-path  Displays paths in full-path style<br>
+                    --debug-show-bbox  Outputs bounding boxes for glyphs<br>
+                    --debug-show-space  Outputs boxes for spaces<br>
+                    --debug-show-block-bbox  Outputs bounding boxes for blocks<br>
+                    --debug-show-block-space  Outputs visualized block spaces<br>
+                    -t  Stops after type checking<br>
+                    --type-check-only  Stops after type checking<br>
+                    -b  Use bytecode compiler<br>
+                    --bytecomp  Use bytecode compiler<br>
+                    --text-mode  Set text mode<br>
+                    --markdown  Pass Markdown source as input<br>
+                    --show-fonts  Displays all the available fonts<br>
+                    -C  Add colon-separated paths to configuration search path<br>
+                    --config  Add colon-separated paths to configuration search path<br>
+                    -help  Display this list of options<br>
+                    --help  Display this list of options </code></div>
+    </section><section>
+      <h1>パッケージを使う</h1>
+      <p>
+        SATySFiが見つけられる場所に置いてある場合は、文書の冒頭で<span class="code-inline"><code>@require: stdjabook</code></span>の様に書いて読み込むことができます。
+        後述するようにSatyrographosを使ってパッケージをインストールすると、パッケージのごとにフォルダ内に入れられるので、
+        <span class="code-inline"><code>@require: base/float</code></span>のように書かなければいけないことがあります。
+      </p>
+      <p>
+        <span class="code-inline"><code>.satyh</code></span>ファイルと同じフォルダ内にある<span class="code-inline"><code>.satyh</code></span>ファイルを読み込むときは<span class="code-inline"><code>@import: local</code></span>の様に書いて読み込みます。
+        （<a href="https://twitter.com/bd_gfngfn/status/961476981442277376">
+          参考ツイート1
+        </a>,
+        <a href="https://twitter.com/bd_gfngfn/status/961477626538770433">
+          参考ツイート2
+        </a>,
+        <a href="https://twitter.com/bd_gfngfn/status/993502360189132800">
+          参考ツイート3
+        </a>）
+      </p>
+      
+    </section><section>
+      <h1>外部パッケージをインストールするする</h1>
+      <p>
+        SATySFiのパッケージはデフォルトで多数用意されていますが、さらに様々な人によって様々なパッケージ（クラスファイルを含む）が作成されて公開されています。
+      </p>
+      <p>
+        現状公開されているパッケージの一覧は
+        <ul>
+        <li><a href="https://github.com/gfngfn/SATySFi/wiki/%E7%9B%AE%E7%9A%84%E5%88%A5%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E4%B8%80%E8%A6%A7">
+          SATySFi Wiki（目的別パッケージ一覧）
+        </a></li>
+        <li><a href="https://puripuri2100.github.io/SATySFi-package-list/">
+          SATySFi package list
+        </a></li>
+        </ul>
+        
+        で見ることができます。
+      </p>
+      <p>
+        これらで紹介されているリポジトリなどからファイルをダウンロードして、SATySFiが見つけられるところに置くだけで使えるようになります。
+      </p>
+      <p>
+        しかし、この作業が結構面倒なので、SATySFiのパッケージマネージャであるSatyrographosを使うことがオススメされます。
+        使い方は<a href="https://qiita.com/na4zagin3/items/14fe2647b663eeac6ac2">
+          Satyrographos でパッケージの簡単インストール
+        </a>を参考にしてください。
+      </p>
+      
+    </section><section>
+      <h1>エディタ拡張</h1>
+      <p>
+        ファイルを編集する際、なにも補助がないとなかなか厳しいです。そこでSATySFiを書く時に補助してくれる拡張機能を紹介します。
+      </p>
+      <ul>
+      <li><a href="https://github.com/qnighy/satysfi.vim">
+        satysfi.vim
+      </a><br>
+      VimでSATySFiを使う時に補助してくれる拡張機能です。</li>
+      <li><a href="https://github.com/gfngfn/satysfi.el">
+        satysfi.el
+      </a><br>
+      EmacsでSATySFiを使う時に補助してくれる拡張機能だと思います。</li>
+      <li><a href="https://github.com/wraikny/vscode-satysfi">
+        vscode-satysfi
+      </a><br>
+      VSCodeでSATySFiを使う時に補助してくれる拡張機能です。</li>
+      <li><a href="https://github.com/yudai-nkt/language-satysfi">
+        language-satysfi
+      </a><br>
+      AtomでSATySFiを使う時に補助してくれる拡張機能です。</li>
+      </ul>
+      
+    </section><section>
+      <h1>書き方</h1>
+      <p>
+        ※SATySFiに標準で含まれているパッケージであるstdjabookを使用する想定で書きます。
+      </p>
+      <p>
+        まずは簡単なドキュメントです。
+      </p>
+      <div class="code-display"><code>@require: stdjabook<br>
+                    StdJaBook.document(|<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;title = {Hello \SATySFi;};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;author = {私};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;show-title = true;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;show-toc = true;<br>
+                    |)'<<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;+p{<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;はじめてのサティスファイ！<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    ></code></div><p>
+        これをHello.satyとして保存し、
+      </p>
+      <div class="code-display"><code>$ satysfi Hello.saty</code></div><p>
+        とするとHello.pdfという名前のPDFファイルが出てきます。
+      </p>
+      <p>
+        次に中身を見ていきましょう。
+      </p>
+      <p>
+        一番最初の<span class="code-inline"><code>@require: stdjabook</code></span>ですが、これは既に説明したように、パッケージを読み込むためのコマンドです（stdjabookはLaTeXでいうところのクラスファイルに相当するもの）。
+      </p>
+      <p>
+        二番目の<span class="code-inline"><code>StdJaBook.document(||)'<></code></span>ですが、この文書全体に関する指定です。<span class="code-inline"><code>document(||)'<></code></span>でも良いのですが、「stdjabookによって提供されたものを使うことを明らかにするために<span class="code-inline"><code>StdJaBook.</code></span>を付けるべき」という考えのもとStdJaBookをつけています。これはどちらでも良いです（<a href="https://twitter.com/bd_gfngfn/status/1031512917814857733">
+          参考ツイート
+        </a>）。<span class="code-inline"><code>document</code></span>の中身ですが、こうなる理由はstdjabook側で<span class="code-inline"><code>document</code></span>が以下のように定義されているからです。
+      </p>
+      <div class="code-display"><code>val document : 'a -> block-text -> document<br>
+                    &nbsp;&nbsp;constraint 'a :: (|<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;title : inline-text;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;author : inline-text;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;show-toc : bool;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;show-title : bool;<br>
+                    &nbsp;&nbsp;|)</code></div><p>
+        なので、<span class="code-inline"><code>title</code></span>と<span class="code-inline"><code>author</code></span>にはインラインテキスト（普通の文章）を、<span class="code-inline"><code>show-toc</code></span>と<span class="code-inline"><code>show-title</code></span>には<span class="code-inline"><code>ture</code></span>か<span class="code-inline"><code>false</code></span>のどちらかを入れましょう。
+        これらの役割は名の通りですが、<span class="code-inline"><code>title</code></span>はこの文書のタイトルを、<span class="code-inline"><code>author</code></span>は著者名を入れるものです。<span class="code-inline"><code>show-toc</code></span>は目次を出力するかしないかの選択を、<span class="code-inline"><code>show-title</code></span>はタイトルを出力するかしないかの選択です。
+      </p>
+      <p>
+        三番目の<span class="code-inline"><code>+p</code></span>ですが、これは段落を表すコマンドです。
+        stdjabookでは以下のように定義されています。
+      </p>
+      <p>
+        この他にも、行頭インデントなしの段落を表す<span class="code-inline"><code>+pn</code></span>というコマンドもあります。
+      </p>
+      <p>
+        一応stdjabookが提供するコマンドとその役割を書いておきます。
+      </p>
+      <ul>
+      <li><span class="code-inline"><code>title</code></span>（inline-textを入れてください。最初のdocumentの部分で指定します。名前の通り、文書のタイトルを書きます。）</li>
+      <li><span class="code-inline"><code>author</code></span>（inline-textを入れてください。最初のdocumentの部分で指定します。名前の通り、文書の作者の名前を書きます。）</li>
+      <li><span class="code-inline"><code>show-title</code></span>（trueかfalseを指定します。最初のdocumentの部分で指定します。タイトルを表示するか否かを選択します。）</li>
+      <li><span class="code-inline"><code>show-toc</code></span>（trueかfalseを指定します。最初のdocumentの部分で指定します。目次を表示するか否かを選択します。）</li>
+      <li><span class="code-inline"><code>\ref</code></span>（相互参照です。本文中で使用します。）</li>
+      <li><span class="code-inline"><code>\ref-page</code></span>（ページの相互参照です。本文中で使用します。）</li>
+      <li><span class="code-inline"><code>\figure</code></span>（画像の配置です。）</li>
+      <li><span class="code-inline"><code>+p</code></span>（行頭インデントのある段落を書くのに使用します。）</li>
+      <li><span class="code-inline"><code>+pn</code></span>（行頭インデントのない段落を書くのにしようします。）</li>
+      <li><span class="code-inline"><code>+section</code></span>（節です。）</li>
+      <li><span class="code-inline"><code>+subsectioon</code></span>（小節です。）</li>
+      <li><span class="code-inline"><code>\emaph</code></span>（強調です。）</li>
+      <li><span class="code-inline"><code>\footnote</code></span>（フットノートです。）</li>
+      </ul>
+      <p>
+        この時、<span class="code-inline"><code>+section</code></span>や<span class="code-inline"><code>+subsection</code></span>は、
+      </p>
+      <div class="code-display"><code>+section{節タイトル}<<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;+p{文章}<br>
+                    ></code></div><p>
+        のように<span class="code-inline"><code><></code></span>を後ろにつけます。これは
+      </p>
+      <p>
+        「水平方向（文字が行をなす向き）の入力を<span class="code-inline"><code>{ 〜 }</code></span> で，垂直方向（行が段落をなす向き）の入力を <span class="code-inline"><code>< 〜 ></code></span> で括って両者を区別する」
+        ということらしいです（<a href="https://twitter.com/bd_gfngfn/status/909753869084762112">
+          参照ツイート
+        </a>）。
+      </p>
+      <p>
+        数式の書き方についてですが、基本的に<span class="code-inline"><code>${}</code></span>の中に書けば良いらしいです（あまり数式を書かないのでよくわからない）。
+      </p>
+      <div class="code-display"><code>${a^5 \times a^7 \times a^3 = a^{15}}</code></div><p>
+        みたいな感じです。括弧は<span class="code-inline"><code>\paren</code></span>を使ったりするなど、少しLaTeXと違うところがあります。
+      </p>
+      
+    </section><section>
+      <h1>資料</h1>
+      <p>
+        The SATySFibookが<a href="https://gfngfn.booth.pm/items/1127224">
+          booth
+        </a>で公開されています。
+      </p>
+      <p>
+        <a href="https://github.com/gfngfn/SATySFi/blob/66fdd27e2ba65e4b4c4c0612834e6c547905ab11/memo-ja-how-to-use.md">
+          日本語で書かれたメモ
+        </a>があります。
+        他に、qnighy氏がまとめてくださった「<a href="https://gist.github.com/qnighy/951d1ee5a7ee7c8f95bb323e881eaf8a">
+          SATySFi構文メモ
+        </a>」があります。
+      </p>
+      <p>
+        また、設計思想等を知ることが出来るものとして、「<a href="https://www.youtube.com/watch?time_continue=1&v=VPJCneHFyNM">
+          【2017年度未踏／No.2】型による静的検証能力の高い組版システムの開発
+        </a> 」という動画と、「<a href="https://drive.google.com/file/d/1BB7ZAiwPO3hVtq7PGImPtMs1-kOd7SzW/view">
+          スライド
+        </a>」があります。
+      </p>
+      
+    </section><section>
+      <h1>情報共有場所</h1>
+      <p>
+        残念ながらSATySFiに関する情報の共有場所はかなり少ないです。残念ながら。
+      </p>
+      <p>
+        <a href="https://github.com/gfngfn/SATySFi/wiki/SATySFi-Wiki">
+          SATySFi Wiki
+        </a>があり、情報共有が可能です。これはGitHubアカウントを持っていれば編集することができます。みなさんもぜひ情報を追加していきましょう！
+      </p>
+      <p>
+        Twitterで情報を収集することもできます。
+      </p>
+      <p>
+        他にもSATySFi Advent Calendarがあります。
+      </p>
+      <ul>
+      <li><a href="https://adventar.org/calendars/3418">
+        SATySFi Advent Calendar 2018
+      </a></li>
+      <li><a href="https://adventar.org/calendars/3929">
+        SATySFi Advent Calendar 2019
+      </a></li>
+      </ul>
+      
+    </section>
+  </body>
+</html>

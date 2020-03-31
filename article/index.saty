@@ -11,6 +11,8 @@ document (|
   +p{\@puripuri2100が投稿するブログです。}
   +listing{
     * \href(`what-is-satysfi.html`){SATySFiに関すること}\line-break;
-      SATySFiに関することをまとめたQiitaの記事を再編集して載せました。
+      \SATySFi;に関することをまとめたQiitaの記事を再編集して載せました。
+    * \href(`make-satysfi-package.html`){SATySFiのパッケージを作る}\line-break;
+      \SATySFi;のパッケージを作る方法です。
   }
 >

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>SATySFiに関すること</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <p>
+      これは「<a href="https://adventar.org/calendars/3929">
+        SATySFi Advent Calendar 2019
+      </a>」の24日目の記事です。
+    </p>
+    <p>
+      23日目は<a href="">
+        bd_gfngfnさん
+      </a>でした。25日目は<a href="">
+        puripuri2100
+      </a>です。
+    </p>
+    <section>
+      <h1>はじめに</h1>
+      <p>
+        SATySFiで機能を拡張したり新たな機能を追加したりするときに用いるのが「パッケージ」です。
+      </p>
+      <p>
+        実態としては<span class="code-inline"><code>let-inline</code></span>や<span class="code-inline"><code>let-block</code></span>で定義されたコマンド、<span class="code-inline"><code>let</code></span>や<span class="code-inline"><code>let-rec</code></span>で定義された関数などです。
+      </p>
+      <p>
+        利用者側がパッケージを<span class="code-inline"><code>@require</code></span>や<span class="code-inline"><code>@import</code></span>で読み込むだけで、そこで定義されているコマンドや関数を使えるようになるという便利機能で、SATySFiを使っている人間ほぼ全員がお世話になっていることでしょう。
+      </p>
+      <p>
+        さて、このパッケージはとても簡単に作ることができるのでここで解説してみようと思います。
+      </p>
+      <p>
+        コマンドや関数をパッケージ化することでメンテナンスしやすくなったり、便利機能を使いまわすことができたり、車輪の再発明を防いだりすることができるので、良いコマンドや関数を作ったらパッケージ化していくようにしましょう。
+      </p>
+      <p>
+        パッケージの配布方法についてはこのアドベントカレンダーの「<a href="https://qiita.com/na4zagin3/items/b392f5d522f9bcc0493b">
+          素敵なライブラリをSatyrographosで配布しよう！
+        </a>」をお読みください。
+      </p>
+      
+    </section><section>
+      <h1>ファイルを分ける</h1>
+      <p>
+        まず、機能が似ている関数やコマンド、目的が同じ関数やコマンドを別のファイルに分けましょう。これだけでもパッケージになります。
+      </p>
+      <p>
+        基本としてはそのままコピペするだけですが、注意点として依存する他のパッケージがある場合はそれを読み込む必要がありますし、元の文書のプリアンブルなどに依存する関数などが書いてある場合はそれもすべてコピペする必要があるということです。
+      </p>
+      <p>
+        ここで定義された関数などは、パッケージを読み込んだだけですぐに使えるようになります。
+        便利ですね。
+      </p>
+      <p>
+        しかし、これには欠点があります。
+        内部で関数などを定義するときだけに使われるものがトップレベルで定義されてしまい、場合によっては他のパッケージの関数などを覆い隠してしまい、衝突してしまうかもしれないのです。
+      </p>
+      <p>
+        ここで使う機能がモジュールです。
+      </p>
+      
+    </section><section>
+      <h1>モジュールを使う</h1>
+      <p>
+        定義する関数などに名前空間を付ける機能がモジュールです。
+      </p>
+      <p>
+        モジュールは
+      </p>
+      <div class="code-display"><code>module 〈名前〉 = struct<br>
+                    <br>
+                    &nbsp;&nbsp;関数やコマンドの定義<br>
+                    <br>
+                    end</code></div><p>
+        という形で使います。
+        コンストラク名は大文字のアルファベットから始まるアルファベットと数字の組み合わせのものです（正規表現なら<span class="code-inline"><code>[A-Z][a-zA-Z0-9]*</code></span>となります）。
+      </p>
+      <p>
+        ここで定義された関数は<span class="code-inline"><code>〈モジュール名〉.〈関数名〉</code></span>のようにして使います。
+        たとえばこんな感じです。
+      </p>
+      <div class="code-display"><code><br>
+                    module Module0 = struct<br>
+                    <br>
+                    &nbsp;&nbsp;let hoge = 1<br>
+                    <br>
+                    end<br>
+                    <br>
+                    let fuga = Module0.hoge</code></div><p>
+        一々モジュール名を書くのが面倒な時は<span class="code-inline"><code>open 〈モジュール名〉</code></span>とすることで省略できるようになります。
+      </p>
+      <p>
+        効果を局所的にしたいときは<span class="code-inline"><code>open 〈モジュール名〉 in</code></span>とするか<span class="code-inline"><code>〈モジュール名〉.(式)</code></span>とするかします。
+      </p>
+      
+    </section><section>
+      <h1>シグネチャを使う</h1>
+      <p>
+        モジュールを使うと名前空間によって関数などが衝突するのを防げますが、内部で使うだけの関数も公開されてしまいます。
+      </p>
+      <p>
+        そこで、シグネチャという機能を使うことで後悔する関数やコマンドを限定することができます。
+      </p>
+      <p>
+        使い方は
+      </p>
+      <div class="code-display"><code>module 〈名前〉:sig <br>
+                    <br>
+                    &nbsp;&nbsp;公開する関数などの名前と型<br>
+                    <br>
+                    end = struct<br>
+                    <br>
+                    &nbsp;&nbsp;関数やコマンドの定義<br>
+                    <br>
+                    end</code></div><p>
+        です。関数は<span class="code-inline"><code>val f : 型</code></span>の形で、型は<span class="code-inline"><code>type t</code></span>か<span class="code-inline"><code>type t = 定義</code></span>の形で公開できます。
+      </p>
+      <p>
+        コマンドは<span class="code-inline"><code>val cmd : 型のリスト inline-cmdかblock-cmdの指定</code></span>か<span class="code-inline"><code>direct cmd : 型 inline-cmdかblock-cmdの指定</code></span>でできます。<span class="code-inline"><code>direct</code></span>を使うと、トップレベルで定義したのと同じように、モジュール名を付けなくてもコマンドを使うことができるようになります。
+      </p>
+      <p>
+        例えばこんな感じです。
+      </p>
+      <div class="code-display"><code>@require: stdja<br>
+                    <br>
+                    module Module1 :sig<br>
+                    <br>
+                    &nbsp;&nbsp;val hoge : int<br>
+                    &nbsp;&nbsp;direct \test : [string] inline-cmd<br>
+                    &nbsp;&nbsp;direct +test : [string] block-cmd<br>
+                    <br>
+                    end = struct<br>
+                    <br>
+                    &nbsp;&nbsp;let hoge = 1<br>
+                    <br>
+                    &nbsp;&nbsp;let fuga = 2 %公開されない<br>
+                    <br>
+                    &nbsp;&nbsp;let-inline \test str = embed-string str<br>
+                    <br>
+                    &nbsp;&nbsp;let-block +test str = <+p{\test(str);}><br>
+                    <br>
+                    end</code></div>
+    </section><section>
+      <h1>おわりに</h1>
+      <p>
+        短い記事なりましたが、モジュール機能やシグネチャを使って素敵なパッケージをたくさん作ってみてください。
+      </p>
+      
+    </section>
+  </body>
+</html>

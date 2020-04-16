@@ -25,3 +25,28 @@ code{
   font-family: Menlo, Consolas;
   font-size : 12pt;
 }
+
+blockquote {
+  margin: 0;
+ margin-bottom: 16px;
+ margin-top: 0;
+ border-left: .25em solid #dfe2e5;
+ color: #6a737d;
+ padding: 0 1em;
+}
+
+blockquote>:first-child {
+ margin-top: 0;
+}
+
+blockquote>:last-child {
+ margin-bottom: 0;
+}
+
+
+blockquote cite {
+  display: block;
+  text-align: right;
+  color: black;
+  font-size: 0.9em;
+}

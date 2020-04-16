@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>SATySFiのbuild方法</title>
+    <link rel="stylesheet" type="text/css" href="../main.css">
+  </head>
+  <body>
+    <p>
+      Makefileの中身を見てみると、Duneが使われているのが分かります。
+    </p>
+    <p>
+      <a href="https://dune.build/">
+        Dune
+      </a>はOCamlのビルドシステムです。
+      Duneは<span class="code-inline"><code>src/dune</code></span>を参照するようです。<span class="code-inline"><code>src/dune</code></span>の冒頭はこのようになっています。
+    </p>
+    <blockquote cite="https://github.com/gfngfn/SATySFi">
+      <div class="code-display"><code>(executable<br>
+                    &nbsp;(name main)<br>
+                    &nbsp;(public_name satysfi)<br>
+                    &nbsp;(flags (-w -3 -bin-annot -thread -safe-string))<br>
+                    &nbsp;(libraries str<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batteries<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;camlimages<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;camlimages.jpeg<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;camlpdf<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;core_kernel<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;core_kernel.pairing_heap<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menhirLib<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otfm<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uutf<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yojson<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;omd<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                    &nbsp;(preprocess (pps<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ppx_deriving.show<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))<br>
+                    &nbsp;)</code></div>
+      <cite>
+        <a href="https://github.com/gfngfn/SATySFi">
+          https://github.com/gfngfn/SATySFi
+        </a>より
+      </cite>
+    </blockquote><p>
+      ここから
+      <ul>
+      <li><span class="code-inline"><code>satysfi</code></span>という実行ファイルを作ること</li>
+      <li><span class="code-inline"><code>main.ml</code></span>というファイルを最初に参照すること</li>
+      <li>使うライブラリが<span class="code-inline"><code>str</code></span>や<span class="code-inline"><code>batteries</code></span>などあること</li>
+      </ul>
+      
+      などが読み取れます。
+    </p>
+    
+  </body>
+</html>

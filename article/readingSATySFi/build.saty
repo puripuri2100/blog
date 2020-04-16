@@ -1,0 +1,48 @@
+@require: make-html/stdjahtml
+@require: make-html/itemize
+@require: make-html/url
+@import: ../../local
+
+document (|
+  title = {\SATySFi;のbuild方法};
+  author = {\@puripuri2100};
+  style-sheet = `../main.css`
+|) '<
+  +p{Makefileの中身を見てみると、Duneが使われているのが分かります。}
+  +p{\href(`https://dune.build/`){Dune}はOCamlのビルドシステムです。
+    Duneは\file(`src/dune`);を参照するようです。\file(`src/dune`);の冒頭はこのようになっています。
+  }
+  +quote ?:(`https://github.com/gfngfn/SATySFi`) {\url(`https://github.com/gfngfn/SATySFi`);} <
+    +code(```
+(executable
+ (name main)
+ (public_name satysfi)
+ (flags (-w -3 -bin-annot -thread -safe-string))
+ (libraries str
+            batteries
+            camlimages
+            camlimages.jpeg
+            camlpdf
+            core_kernel
+            core_kernel.pairing_heap
+            menhirLib
+            otfm
+            uutf
+            yojson
+            omd
+            )
+ (preprocess (pps
+              ppx_deriving.show
+              ))
+ )
+    ```);
+  >
+  +p{ここから
+    \listing{
+      * \file(`satysfi`);という実行ファイルを作ること
+      * \file(`main.ml`);というファイルを最初に参照すること
+      * 使うライブラリが\file(`str`);や\file(`batteries`);などあること
+    }
+    などが読み取れます。
+  }
+>

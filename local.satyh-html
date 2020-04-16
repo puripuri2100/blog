@@ -1,4 +1,5 @@
 @require: html-base
+@require: make-html/code
 
 let-inline tinfo \strong it =
   HTMLBase.tag tinfo `strong` (fun tinfo -> stringify-inline tinfo it)
@@ -6,3 +7,23 @@ let-inline tinfo \strong it =
 let-inline tinfo \line-break = `<br>`
 
 let-inline tinfo \SATySFi = `SATySFi`
+
+let-block tinfo +quote ?:url-opt it bt =
+  match url-opt with
+  | None -> (
+    HTMLBase.tag tinfo `blockquote` (fun tinfo ->
+      stringify-block tinfo bt
+      ^ break tinfo ^
+      HTMLBase.tag tinfo `cite` (fun tinfo -> stringify-inline tinfo {#it;より})
+    )
+  )
+  | Some(url) -> (
+    HTMLBase.tag ?:([(`cite`,url)]) tinfo `blockquote` (fun tinfo ->
+      stringify-block tinfo bt
+      ^ break tinfo ^
+      HTMLBase.tag tinfo `cite` (fun tinfo -> stringify-inline tinfo {#it;より})
+    )
+  )
+
+
+let-inline \file s = {\code(s);}

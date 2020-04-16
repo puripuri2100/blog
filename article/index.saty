@@ -14,5 +14,6 @@ document (|
       \SATySFi;に関することをまとめたQiitaの記事を再編集して載せました。
     * \href(`make-satysfi-package.html`){SATySFiのパッケージを作る}\line-break;
       \SATySFi;のパッケージを作る方法です。
+    * \href(`readingSATySFi/index.html`){\SATySFi;の実装を読む}
   }
 >

@@ -1,0 +1,15 @@
+@require: make-html/stdjahtml
+@require: make-html/itemize
+@require: make-html/url
+@import: ../../local
+
+document (|
+  title = {\SATySFi;のbuild方法};
+  author = {\@puripuri2100};
+  style-sheet = `../main.css`
+|) '<
+  +p{\SATySFi;の実装を読んでみます。}
+  +listing{
+    * \href(`build.html`){\SATySFi;のbuild方法}
+  }
+>
